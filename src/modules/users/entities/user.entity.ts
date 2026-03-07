@@ -1,5 +1,7 @@
-import {Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, Unique} from "typeorm";
+import {Column, Entity, JoinTable, ManyToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
 import {Role} from "./role.entity";
+import {Wallet} from "./wallet.entity";
+
 
 @Entity("users")
 export class User {
@@ -21,16 +23,30 @@ export class User {
     @ManyToMany(() => Role, (role) => role.users)
     @JoinTable()
     roles: Role[];
+
+    @OneToOne(() => Wallet, (wallet) => wallet.user)
+    wallet: Wallet;
+
+    @ManyToMany(() => Room, (room) => room.users)
+    rooms: Room[];
 }
 
 
-class Wallet {
+@Entity("rooms")
+export class Room {
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column()
-    balance: number;
+    name: string
 
+    @Column()
+    minBlind: number;
 
+    @Column()
+    isActive: boolean;
 
+    @ManyToMany(() => User, (user) => user.rooms)
+    @JoinTable()
+    users: User[];
 }
