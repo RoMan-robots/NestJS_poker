@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { InjectRepository } from "@nestjs/typeorm";
+import {Injectable} from '@nestjs/common';
+import {CreateUserDto} from './dto/create-user.dto';
+import {UpdateUserDto} from './dto/update-user.dto';
+import {InjectRepository} from "@nestjs/typeorm";
 import {User} from "./entities/user.entity";
-import { Repository } from "typeorm";
+import {Repository} from "typeorm";
 import {Role} from "./entities/role.entity";
 import bcrypt from "bcrypt";
 import {UserRole} from "./enums/user-roles.enum";
@@ -67,8 +67,8 @@ export class UsersService {
     return `This action returns all users`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  findOne(id: number): Promise<User | null> {
+   return this.userRepository.findOneBy({id})
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
