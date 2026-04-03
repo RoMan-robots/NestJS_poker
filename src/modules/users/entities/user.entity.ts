@@ -27,9 +27,9 @@ export class User {
   name: string;
 
   @ApiProperty({ type: () => [Role], required: false })
-  @ManyToMany(() => Role, (role) => role.users, { lazy: true })
+  @ManyToMany(() => Role, (role) => role.users, { eager: true })
   @JoinTable()
-  roles: Promise<Role[]>;
+  roles: Role[];
 
   @ApiProperty({ type: () => Wallet, required: false })
   @OneToOne(() => Wallet, (wallet) => wallet.user, { eager: true })
