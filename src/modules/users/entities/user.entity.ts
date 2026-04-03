@@ -27,15 +27,15 @@ export class User {
   name: string;
 
   @ApiProperty({ type: () => [Role], required: false })
-  @ManyToMany(() => Role, (role) => role.users)
+  @ManyToMany(() => Role, (role) => role.users, { lazy: true })
   @JoinTable()
-  roles: Role[];
+  roles: Promise<Role[]>;
 
   @ApiProperty({ type: () => Wallet, required: false })
-  @OneToOne(() => Wallet, (wallet) => wallet.user)
+  @OneToOne(() => Wallet, (wallet) => wallet.user, { eager: true })
   wallet: Wallet;
 
   @ApiProperty({ isArray: true, required: false })
-  @ManyToMany(() => Room, (room) => room.users)
+  @ManyToMany(() => Room, (room) => room.users, { lazy: true })
   rooms: Room[];
 }

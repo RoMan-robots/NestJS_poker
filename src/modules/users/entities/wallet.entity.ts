@@ -9,7 +9,7 @@ export class Wallet {
   id: number;
 
   @ApiProperty({ type: () => User, required: false })
-  @OneToOne(() => User, (user) => user.wallet)
+  @OneToOne(() => User, (user) => user.wallet, { lazy: true })
   @JoinColumn()
   user: User;
 
