@@ -37,5 +37,5 @@ export class User {
 
   @ApiProperty({ isArray: true, required: false })
   @ManyToMany(() => Room, (room) => room.users, { lazy: true })
-  rooms: Room[];
+  rooms: Promise<Room[]>;
 }

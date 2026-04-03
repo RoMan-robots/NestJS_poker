@@ -11,7 +11,7 @@ export class Wallet {
   @ApiProperty({ type: () => User, required: false })
   @OneToOne(() => User, (user) => user.wallet, { lazy: true })
   @JoinColumn()
-  user: User;
+  user: Promise<User>;
 
   @ApiProperty({ example: 100 })
   @Column()
